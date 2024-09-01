@@ -24,8 +24,8 @@ const maxWidth = 800;
 
 type PDFFile = string | File | null;
 
-export default function Sample() {
-  const [file, setFile] = useState<PDFFile>('./sample.pdf');
+export default function PDFSample() {
+  const [file, setFile] = useState<PDFFile>('sample.pdf');
   const [numPages, setNumPages] = useState<number>();
   const [containerRef, setContainerRef] = useState<HTMLElement | null>(null);
   const [containerWidth, setContainerWidth] = useState<number>();
@@ -72,7 +72,6 @@ export default function Sample() {
             onLoadSuccess={onDocumentLoadSuccess}
             options={options}
           >
-            <Thumbnail pageIndex={0} />
             <Outline />
             {Array.from(new Array(numPages), (_el, index) => (
               <Page

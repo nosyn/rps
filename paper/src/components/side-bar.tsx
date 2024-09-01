@@ -1,17 +1,9 @@
 import {
   Tooltip,
-  TooltipTrigger,
   TooltipContent,
+  TooltipTrigger,
 } from '@/components/ui/tooltip';
-import {
-  MicroscopeIcon,
-  Home,
-  ShoppingCart,
-  Package,
-  Users2,
-  LineChart,
-  Settings,
-} from 'lucide-react';
+import { Home, MicroscopeIcon, Settings } from 'lucide-react';
 import Link from 'next/link';
 
 export const SideBar = () => {
@@ -23,7 +15,7 @@ export const SideBar = () => {
           className='group flex h-9 w-9 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:h-8 md:w-8 md:text-base'
         >
           <MicroscopeIcon className='h-4 w-4 transition-all group-hover:scale-110' />
-          <span className='sr-only'>Acme Inc</span>
+          <span className='sr-only'>Paper Inc</span>
         </Link>
         <Tooltip>
           <TooltipTrigger asChild>
