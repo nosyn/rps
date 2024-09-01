@@ -11,14 +11,6 @@ import {
 import Image from 'next/image';
 import Link from 'next/link';
 
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from '@/components/ui/breadcrumb';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -30,6 +22,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Input } from '@/components/ui/input';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { ModeToggle } from './mode-toggle';
 
 export const Header = () => {
   return (
@@ -88,25 +81,6 @@ export const Header = () => {
           </nav>
         </SheetContent>
       </Sheet>
-      <Breadcrumb className='hidden md:flex'>
-        <BreadcrumbList>
-          <BreadcrumbItem>
-            <BreadcrumbLink asChild>
-              <Link href='#'>Dashboard</Link>
-            </BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbLink asChild>
-              <Link href='#'>Orders</Link>
-            </BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbPage>Recent Orders</BreadcrumbPage>
-          </BreadcrumbItem>
-        </BreadcrumbList>
-      </Breadcrumb>
       <div className='relative ml-auto flex-1 md:grow-0'>
         <Search className='absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground' />
         <Input
@@ -115,6 +89,7 @@ export const Header = () => {
           className='w-full rounded-lg bg-background pl-8 md:w-[200px] lg:w-[336px]'
         />
       </div>
+      <ModeToggle />
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button
