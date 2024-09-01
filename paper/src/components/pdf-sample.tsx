@@ -6,8 +6,6 @@ import { pdfjs, Document, Page, Outline, Thumbnail } from 'react-pdf';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import 'react-pdf/dist/esm/Page/TextLayer.css';
 
-import './Sample.css';
-
 import type { PDFDocumentProxy } from 'pdfjs-dist';
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
@@ -26,8 +24,8 @@ const maxWidth = 800;
 
 type PDFFile = string | File | null;
 
-export default function Sample() {
-  const [file, setFile] = useState<PDFFile>('./sample.pdf');
+export default function PDFSample() {
+  const [file, setFile] = useState<PDFFile>('sample.pdf');
   const [numPages, setNumPages] = useState<number>();
   const [containerRef, setContainerRef] = useState<HTMLElement | null>(null);
   const [containerWidth, setContainerWidth] = useState<number>();
@@ -74,7 +72,6 @@ export default function Sample() {
             onLoadSuccess={onDocumentLoadSuccess}
             options={options}
           >
-            <Thumbnail pageIndex={0} />
             <Outline />
             {Array.from(new Array(numPages), (_el, index) => (
               <Page
