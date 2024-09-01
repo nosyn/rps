@@ -2,7 +2,7 @@
 
 import { useCallback, useState } from 'react';
 import { useResizeObserver } from '@wojtekmaj/react-hooks';
-import { pdfjs, Document, Page, Outline, Thumbnail } from 'react-pdf';
+import { pdfjs, Document, Page, Outline } from 'react-pdf';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import 'react-pdf/dist/esm/Page/TextLayer.css';
 
@@ -66,7 +66,7 @@ export default function PDFSample() {
           <label htmlFor='file'>Load from file:</label>{' '}
           <input onChange={onFileChange} type='file' />
         </div>
-        <div className='Example__container__document' ref={setContainerRef}>
+        <div className='max-h-full overflow-auto' ref={setContainerRef}>
           <Document
             file={file}
             onLoadSuccess={onDocumentLoadSuccess}
