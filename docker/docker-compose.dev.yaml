@@ -1,0 +1,36 @@
+name: dev-rps
+
+services:
+  postgresql:
+    container_name: rps-database
+    image: 'bitnami/postgresql:16.3.0'
+    ports:
+      - 5432:5432
+    volumes:
+      - ./volumes/postgresql-persistence:/bitnami/postgresql
+    environment:
+      - POSTGRESQL_DATABASE=rps-db
+      - POSTGRESQL_USERNAME=db_user
+      - POSTGRESQL_PASSWORD=db_password
+
+  # backend:
+  #   container_name: rps-backend
+  #   image: 'node:22'
+  #   ports:
+  #     - 8000:8000
+  #   volumes:
+  #     - ../backend:/app
+  #     - /app/node_modules
+  #   working_dir: /app
+  #   command: sh -c "npm install && npm run dev"
+
+  paper:
+    container_name: rps-paper
+    image: 'node:22'
+    ports:
+      - 3000:3000
+    volumes:
+      - ../paper:/app
+      - /app/node_modules
+    working_dir: /app
+    command: sh -c "npm install && npm run dev"
