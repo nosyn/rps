@@ -1,5 +1,7 @@
-import PDFSample from '@/components/pdf-sample';
-
 export default function Home() {
-  return <PDFSample />;
+  return (
+    <div className='p-4'>
+      <div>09</div>
+    </div>
+  );
 }
