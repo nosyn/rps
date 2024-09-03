@@ -24,7 +24,7 @@ const maxWidth = 800;
 
 type PDFFile = string | File | null;
 
-export default function PDFSample() {
+export function PDFSample() {
   const [file, setFile] = useState<PDFFile>('sample.pdf');
   const [numPages, setNumPages] = useState<number>();
   const [containerRef, setContainerRef] = useState<HTMLElement | null>(null);

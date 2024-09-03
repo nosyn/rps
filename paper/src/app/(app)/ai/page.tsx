@@ -1,6 +1,5 @@
 'use client';
 
-import PDFSample from '@/components/pdf-sample';
 import { CornerDownLeft, Mic, Paperclip } from 'lucide-react';
 
 import { Badge } from '@/components/ui/badge';
@@ -13,6 +12,7 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip';
 import { useChat } from 'ai/react';
+import { PDFSample } from '@/components/pdf/pdf-sample';
 
 export default function Dashboard() {
   const { messages, input, handleInputChange, handleSubmit } = useChat();

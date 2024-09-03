@@ -26,11 +26,11 @@ services:
 
   paper:
     container_name: rps-paper
-    image: 'node:22'
+    image: 'oven/bun:latest'
     ports:
       - 3000:3000
     volumes:
       - ../paper:/app
       - /app/node_modules
     working_dir: /app
-    command: sh -c "npm install && npm run dev"
+    command: sh -c "bun install && bun dev"
