@@ -28,7 +28,7 @@ export default function RootLayout({
         >
           <div className='flex min-h-screen w-full flex-col bg-muted/40'>
             <MainNavbar />
-            <div className='flex flex-col sm:gap-4 sm:py-4 sm:pl-14'>
+            <div className='flex flex-col gap-2 sm:pt-4 sm:pl-14 min-h-screen'>
               <Header />
               {children}
             </div>

@@ -24,7 +24,7 @@ const maxWidth = 800;
 
 type PDFFile = string | File | null;
 
-export function PDFSample() {
+export function PDFViewer() {
   const [file, setFile] = useState<PDFFile>('sample.pdf');
   const [numPages, setNumPages] = useState<number>();
   const [containerRef, setContainerRef] = useState<HTMLElement | null>(null);
@@ -57,7 +57,7 @@ export function PDFSample() {
   }
 
   return (
-    <div>
+    <div className='flex flex-col justify-center bg-cyan-500'>
       <div>
         <label htmlFor='file'>Load from file:</label>
         <input onChange={onFileChange} type='file' />
