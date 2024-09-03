@@ -2,11 +2,14 @@
 
 import { useCallback, useState } from 'react';
 import { useResizeObserver } from '@wojtekmaj/react-hooks';
-import { pdfjs, Document, Page, Outline } from 'react-pdf';
+import { pdfjs, Document, Page } from 'react-pdf';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import 'react-pdf/dist/esm/Page/TextLayer.css';
 
 import type { PDFDocumentProxy } from 'pdfjs-dist';
+import { Label } from '../ui/label';
+import { Input } from '../ui/input';
+import { paperClient } from '@/lib/api/paper';
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   'pdfjs-dist/build/pdf.worker.min.mjs',
@@ -40,13 +43,16 @@ export function PDFViewer() {
 
   useResizeObserver(containerRef, resizeObserverOptions, onResize);
 
-  function onFileChange(event: React.ChangeEvent<HTMLInputElement>): void {
+  async function onFileChange(
+    event: React.ChangeEvent<HTMLInputElement>
+  ): Promise<void> {
     const { files } = event.target;
 
     const nextFile = files?.[0];
 
     if (nextFile) {
       setFile(nextFile);
+      await paperClient.uploadFile(nextFile);
     }
   }
 
@@ -58,9 +64,9 @@ export function PDFViewer() {
 
   return (
     <div className='flex flex-col justify-center bg-cyan-500'>
-      <div>
-        <label htmlFor='file'>Load from file:</label>
-        <input onChange={onFileChange} type='file' />
+      <div className='grid w-full max-w-sm items-center gap-1.5'>
+        <Label htmlFor='document'>Upload Document</Label>
+        <Input onChange={onFileChange} id='document' type='file' />
       </div>
       <div ref={setContainerRef}>
         <Document
