@@ -65,7 +65,7 @@ services:
       - ./volumes/qdrant:/qdrant/storage
     ports:
       - 6333:6333
-    environment:
-      - QDRANT__SERVICE__API_KEY=qdrant_secret_api_key
+    # environment:
+    # - QDRANT__SERVICE__API_KEY=qdrant_secret_api_key
     networks:
       - vector-database
