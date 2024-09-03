@@ -28,7 +28,7 @@ const TopNavLinks: NavLink[] = [
     label: 'Dashboard',
   },
   {
-    href: '/ai',
+    href: '/references',
     icon: RocketIcon,
     label: 'AI Chat',
   },

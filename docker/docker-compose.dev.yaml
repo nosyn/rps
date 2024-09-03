@@ -1,0 +1,49 @@
+name: dev-rps
+
+services:
+  postgresql:
+    container_name: rps-database
+    image: 'bitnami/postgresql:16.3.0'
+    ports:
+      - 5432:5432
+    volumes:
+      - ./volumes/postgresql-persistence:/bitnami/postgresql
+    environment:
+      - POSTGRESQL_DATABASE=rps-db
+      - POSTGRESQL_USERNAME=db_user
+      - POSTGRESQL_PASSWORD=db_password
+
+  # backend:
+  #   container_name: rps-backend
+  #   image: 'node:22'
+  #   ports:
+  #     - 8000:8000
+  #   volumes:
+  #     - ../backend:/app
+  #     - /app/node_modules
+  #   working_dir: /app
+  #   command: sh -c "npm install && npm run dev"
+
+  paper:
+    container_name: rps-paper
+    image: 'oven/bun:latest'
+    ports:
+      - 3000:3000
+    volumes:
+      - ../paper:/app
+      - /app/node_modules
+    working_dir: /app
+    command: sh -c "bun install && bun dev"
+
+  localstack:
+    container_name: '${LOCALSTACK_DOCKER_NAME:-localstack-main}'
+    image: localstack/localstack
+    ports:
+      - '127.0.0.1:4566:4566' # LocalStack Gateway
+      - '127.0.0.1:4510-4559:4510-4559' # external services port range
+    environment:
+      # LocalStack configuration: https://docs.localstack.cloud/references/configuration/
+      - DEBUG=${DEBUG:-0}
+    volumes:
+      - '${LOCALSTACK_VOLUME_DIR:-./volume}:/var/lib/localstack'
+      - '/var/run/docker.sock:/var/run/docker.sock'
