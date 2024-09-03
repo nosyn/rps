@@ -2,11 +2,8 @@
 
 import { AIChat } from '@/components/ai/chat';
 import { PDFViewer } from '@/components/pdf/pdf-viewer';
-import { useChat } from 'ai/react';
 
 export default function Dashboard() {
-  const { messages, input, handleInputChange, handleSubmit } = useChat();
-
   return (
     <main className='grid flex-1 gap-4 overflow-auto p-4 grid-cols-1 lg:grid-cols-2'>
       <div
