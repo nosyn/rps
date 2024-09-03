@@ -1,7 +1,14 @@
 'use client';
 
+import dynamic from 'next/dynamic';
 import { AIChat } from '@/components/ai/chat';
-import { PDFViewer } from '@/components/pdf/pdf-viewer';
+const PDFViewer = dynamic(
+  () =>
+    import('../../../components/pdf/pdf-viewer').then((res) => res.PDFViewer),
+  {
+    ssr: false,
+  }
+);
 
 export default function Dashboard() {
   return (

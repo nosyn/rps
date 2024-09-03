@@ -22,5 +22,3 @@ if [ $? -eq 0 ]; then
 else
     echo "Failed to start Docker Compose."
 fi
-
-sh ./setup-localstack-s3.sh
