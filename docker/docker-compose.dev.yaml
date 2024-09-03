@@ -1,5 +1,9 @@
 name: dev-rps
 
+networks:
+  file-storage:
+  vector-database:
+
 services:
   postgresql:
     container_name: rps-database
@@ -34,6 +38,9 @@ services:
       - /app/node_modules
     working_dir: /app
     command: sh -c "npm install && npm run dev"
+    networks:
+      - file-storage
+      - vector-database
 
   localstack:
     container_name: '${LOCALSTACK_DOCKER_NAME:-localstack-main}'
@@ -45,5 +52,20 @@ services:
       # LocalStack configuration: https://docs.localstack.cloud/references/configuration/
       - DEBUG=${DEBUG:-0}
     volumes:
-      - '${LOCALSTACK_VOLUME_DIR:-./volume}:/var/lib/localstack'
+      - '${LOCALSTACK_VOLUME_DIR:-./volumes/localstack}:/var/lib/localstack'
       - '/var/run/docker.sock:/var/run/docker.sock'
+    networks:
+      - file-storage
+
+  qdrant:
+    container_name: rps-qdrant
+    image: 'qdrant/qdrant'
+    restart: 'always'
+    volumes:
+      - ./volumes/qdrant:/qdrant/storage
+    ports:
+      - 6333:6333
+    environment:
+      - QDRANT__SERVICE__API_KEY=qdrant_secret_api_key
+    networks:
+      - vector-database

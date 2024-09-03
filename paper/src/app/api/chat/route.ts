@@ -1,6 +1,8 @@
+import { vectorStore } from '@/lib/vector-store/qdrant';
 import { AIMessage, HumanMessage } from '@langchain/core/messages';
 import { ChatOpenAI } from '@langchain/openai';
 import { LangChainAdapter, Message } from 'ai';
+import { createStuffDocumentsChain } from 'langchain/chains/combine_documents';
 
 // Allow streaming responses up to 30 seconds
 export const maxDuration = 30;
@@ -11,6 +13,8 @@ export async function POST(req: Request) {
   }: {
     messages: Message[];
   } = await req.json();
+
+  const retriever = (await vectorStore()).asRetriever();
 
   const model = new ChatOpenAI({
     model: 'gpt-3.5-turbo-0125',

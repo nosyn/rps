@@ -5,7 +5,6 @@ import { useResizeObserver } from '@wojtekmaj/react-hooks';
 import { pdfjs, Document, Page } from 'react-pdf';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import 'react-pdf/dist/esm/Page/TextLayer.css';
-
 import type { PDFDocumentProxy } from 'pdfjs-dist';
 import { Label } from '../ui/label';
 import { Input } from '../ui/input';
@@ -64,7 +63,7 @@ export function PDFViewer() {
 
   return (
     <div className='flex flex-col justify-center bg-cyan-500'>
-      <div className='grid w-full max-w-sm items-center gap-1.5'>
+      <div className='flex p-2 justify-center'>
         <Label htmlFor='document'>Upload Document</Label>
         <Input onChange={onFileChange} id='document' type='file' />
       </div>

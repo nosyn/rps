@@ -2,12 +2,12 @@
 echo "Waiting for s3 localstack is ready" 
 
 MAX_TRIES=5
-CONTAINER_NAME=localstack_main
+CONTAINER_NAME=localstack-main
 BUCKET_NAME=rps-bucket
 ENDPOINT_URL=http://localhost:4566
-CURRENT_DIR=$(pwd)
-ROOT_DIR=$(dirname $CURRENT_DIR)
-CORS_CONFIG_FILE=file://$ROOT_DIR/cors-config.json
+SCRIPT_PATH=$(dirname "$(readlink -f "$0")")
+ROOT_DIR=$SCRIPT_PATH/..
+CORS_CONFIG_FILE=file://$ROOT_DIR/docker/localstack-cors-config.json
 
 is_local_stack_ready() {
   docker logs $CONTAINER_NAME | grep Ready. 
