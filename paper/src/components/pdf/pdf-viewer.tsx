@@ -27,7 +27,7 @@ const maxWidth = 800;
 type PDFFile = string | File | null;
 
 export function PDFViewer() {
-  const [file, setFile] = useState<PDFFile>('sample.pdf');
+  const [file, setFile] = useState<PDFFile>('/sample.pdf');
   const [numPages, setNumPages] = useState<number>();
   const [containerRef, setContainerRef] = useState<HTMLElement | null>(null);
   const [containerWidth, setContainerWidth] = useState<number>();
