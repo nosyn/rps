@@ -1,12 +1,10 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  experimental: {
-    turbo: {
-      resolveAlias: {
-        canvas: './empty-module.ts',
-      },
-    },
-  },
-};
+import fs from "fs";
+import withLlamaIndex from "llamaindex/next";
+import webpack from "./webpack.config.mjs";
 
-export default nextConfig;
+const nextConfig = JSON.parse(fs.readFileSync("./next.config.json", "utf-8"));
+nextConfig.webpack = webpack;
+
+// use withLlamaIndex to add necessary modifications for llamaindex library
+export default withLlamaIndex(nextConfig);
