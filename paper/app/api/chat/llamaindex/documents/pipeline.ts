@@ -1,8 +1,8 @@
 import {
   Document,
   IngestionPipeline,
+  SentenceSplitter,
   Settings,
-  SimpleNodeParser,
   VectorStoreIndex,
 } from "llamaindex";
 
@@ -13,7 +13,7 @@ export async function runPipeline(
   // Use ingestion pipeline to process the documents into nodes and add them to the vector store
   const pipeline = new IngestionPipeline({
     transformations: [
-      new SimpleNodeParser({
+      new SentenceSplitter({
         chunkSize: Settings.chunkSize,
         chunkOverlap: Settings.chunkOverlap,
       }),
