@@ -1,63 +1,48 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { JSONValue } from "ai";
-import { CornerDownLeft, Mic } from "lucide-react";
-import { DocumentPreview } from "../document-preview";
-import UploadImagePreview from "../upload-image-preview";
-import { ChatHandler } from "./chat.interface";
-import { useFile } from "./hooks/use-file";
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { JSONValue } from 'ai';
+import { CornerDownLeft, Mic } from 'lucide-react';
+import { DocumentPreview } from '../document-preview';
+import UploadImagePreview from '../upload-image-preview';
+import { ChatHandler } from './chat.interface';
+import { useFile } from './hooks/use-file';
 
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
-import FileUploader from "../file-uploader";
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
+import FileUploader from '../file-uploader';
 
-const ALLOWED_EXTENSIONS = ["png", "jpg", "jpeg", "csv", "pdf", "txt", "docx"];
+const ALLOWED_EXTENSIONS = ['png', 'jpg', 'jpeg', 'csv', 'pdf', 'txt', 'docx'];
 
 export default function ChatInput(
   props: Pick<
     ChatHandler,
-    | "isLoading"
-    | "input"
-    | "onFileUpload"
-    | "onFileError"
-    | "handleSubmit"
-    | "handleInputChange"
-    | "messages"
-    | "setInput"
-    | "append"
+    | 'isLoading'
+    | 'input'
+    | 'onFileUpload'
+    | 'onFileError'
+    | 'handleSubmit'
+    | 'handleInputChange'
+    | 'messages'
+    | 'setInput'
+    | 'append'
   > & {
     requestParams?: any;
     setRequestData?: React.Dispatch<any>;
-  },
+  }
 ) {
-  const {
-    imageUrl,
-    setImageUrl,
-    uploadFile,
-    files,
-    removeDoc,
-    reset,
-    getAnnotations,
-  } = useFile();
+  const { imageUrl, setImageUrl, uploadFile, files, removeDoc, reset, getAnnotations } = useFile();
 
   // default submit function does not handle including annotations in the message
   // so we need to use append function to submit new message with annotations
-  const handleSubmitWithAnnotations = (
-    e: React.FormEvent<HTMLFormElement>,
-    annotations: JSONValue[] | undefined,
-  ) => {
+  const handleSubmitWithAnnotations = (e: React.FormEvent<HTMLFormElement>, annotations: JSONValue[] | undefined) => {
     e.preventDefault();
     props.append!({
       content: props.input,
-      role: "user",
+      role: 'user',
       createdAt: new Date(),
       annotations,
     });
-    props.setInput!("");
+    props.setInput!('');
   };
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -71,7 +56,7 @@ export default function ChatInput(
 
   const handleUploadFile = async (file: File) => {
     if (imageUrl || files.length > 0) {
-      alert("You can only upload one file at a time.");
+      alert('You can only upload one file at a time.');
       return;
     }
     try {
@@ -92,17 +77,11 @@ export default function ChatInput(
         Message
       </Label>
 
-      {imageUrl && (
-        <UploadImagePreview url={imageUrl} onRemove={() => setImageUrl(null)} />
-      )}
+      {imageUrl && <UploadImagePreview url={imageUrl} onRemove={() => setImageUrl(null)} />}
       {files.length > 0 && (
         <div className="flex gap-4 w-full overflow-auto py-2">
           {files.map((file) => (
-            <DocumentPreview
-              key={file.id}
-              file={file}
-              onRemove={() => removeDoc(file)}
-            />
+            <DocumentPreview key={file.id} file={file} onRemove={() => removeDoc(file)} />
           ))}
         </div>
       )}
@@ -137,12 +116,7 @@ export default function ChatInput(
           </TooltipTrigger>
           <TooltipContent side="top">Use Microphone</TooltipContent>
         </Tooltip>
-        <Button
-          type="submit"
-          size="sm"
-          className="ml-auto gap-1.5"
-          disabled={props.isLoading || !props.input.trim()}
-        >
+        <Button type="submit" size="sm" className="ml-auto gap-1.5" disabled={props.isLoading || !props.input.trim()}>
           Send Message
           <CornerDownLeft className="size-3.5" />
         </Button>

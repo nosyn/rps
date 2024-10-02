@@ -1,4 +1,4 @@
-import ChatSection from "../components/chat-section";
+import ChatSection from '../components/chat-section';
 
 export default function DashboardPage() {
   return (
