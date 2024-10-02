@@ -1,6 +1,6 @@
+import { Button } from "@/components/ui/button";
 import { icons, LucideIcon } from "lucide-react";
 import { useMemo } from "react";
-import { Button } from "../../button";
 import {
   Drawer,
   DrawerClose,

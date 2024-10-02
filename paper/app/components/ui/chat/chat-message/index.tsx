@@ -1,8 +1,8 @@
 import { Check, Copy } from "lucide-react";
 
+import { Button } from "@/components/ui/button";
 import { Message } from "ai";
 import { Fragment } from "react";
-import { Button } from "../../button";
 import { useCopyToClipboard } from "../hooks/use-copy-to-clipboard";
 import {
   AgentEventData,

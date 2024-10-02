@@ -1,8 +1,10 @@
 "use client";
 
+import { buttonVariants } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { Loader2, Paperclip } from "lucide-react";
 import { ChangeEvent, useState } from "react";
-import { buttonVariants } from "./button";
 import { cn } from "./lib/utils";
 
 export interface FileUploaderProps {
@@ -78,7 +80,7 @@ export default function FileUploader({
 
   return (
     <div className="self-stretch">
-      <input
+      <Input
         type="file"
         id={inputId}
         style={{ display: "none" }}
@@ -86,20 +88,21 @@ export default function FileUploader({
         accept={allowedExtensions?.join(",")}
         disabled={config?.disabled || uploading}
       />
-      <label
+      <Label
         htmlFor={inputId}
         className={cn(
-          buttonVariants({ variant: "secondary", size: "icon" }),
+          buttonVariants({ variant: "ghost", size: "icon" }),
           "cursor-pointer",
           uploading && "opacity-50",
         )}
       >
+        <span className="sr-only">Attach file</span>
         {uploading ? (
           <Loader2 className="h-4 w-4 animate-spin" />
         ) : (
-          <Paperclip className="-rotate-45 w-4 h-4" />
+          <Paperclip className="size-4" />
         )}
-      </label>
+      </Label>
     </div>
   );
 }

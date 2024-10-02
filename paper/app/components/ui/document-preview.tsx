@@ -1,10 +1,10 @@
+import { Button } from "@/components/ui/button";
 import { XCircleIcon } from "lucide-react";
 import Image from "next/image";
 import DocxIcon from "../ui/icons/docx.svg";
 import PdfIcon from "../ui/icons/pdf.svg";
 import SheetIcon from "../ui/icons/sheet.svg";
 import TxtIcon from "../ui/icons/txt.svg";
-import { Button } from "./button";
 import { DocumentFile, DocumentFileType } from "./chat";
 import {
   Drawer,
