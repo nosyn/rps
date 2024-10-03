@@ -106,48 +106,46 @@ export default function ChatInput(
           ))}
         </div>
       )}
-      <div className="relative overflow-hidden rounded-lg border bg-background focus-within:ring-1 focus-within:ring-ring">
-        <Input
-          autoFocus
-          name="message"
-          placeholder="Type a message"
-          className="min-h-12 resize-none border-0 p-3 shadow-none focus-visible:ring-0"
-          value={props.input}
-          onChange={props.handleInputChange}
-        />
-        <div className="flex items-center p-3 pt-0">
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <FileUploader
-                onFileUpload={handleUploadFile}
-                onFileError={props.onFileError}
-                config={{
-                  allowedExtensions: ALLOWED_EXTENSIONS,
-                  disabled: props.isLoading,
-                }}
-              />
-            </TooltipTrigger>
-            <TooltipContent side="top">Attach File</TooltipContent>
-          </Tooltip>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button variant="ghost" size="icon">
-                <Mic className="size-4" />
-                <span className="sr-only">Use Microphone</span>
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent side="top">Use Microphone</TooltipContent>
-          </Tooltip>
-          <Button
-            type="submit"
-            size="sm"
-            className="ml-auto gap-1.5"
-            disabled={props.isLoading || !props.input.trim()}
-          >
-            Send Message
-            <CornerDownLeft className="size-3.5" />
-          </Button>
-        </div>
+      <Input
+        autoFocus
+        name="message"
+        placeholder="Type a message"
+        className="min-h-12 resize-none border-0 p-3 shadow-none focus-visible:ring-0"
+        value={props.input}
+        onChange={props.handleInputChange}
+      />
+      <div className="flex items-center p-3 pt-0">
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <FileUploader
+              onFileUpload={handleUploadFile}
+              onFileError={props.onFileError}
+              config={{
+                allowedExtensions: ALLOWED_EXTENSIONS,
+                disabled: props.isLoading,
+              }}
+            />
+          </TooltipTrigger>
+          <TooltipContent side="top">Attach File</TooltipContent>
+        </Tooltip>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button variant="ghost" size="icon">
+              <Mic className="size-4" />
+              <span className="sr-only">Use Microphone</span>
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent side="top">Use Microphone</TooltipContent>
+        </Tooltip>
+        <Button
+          type="submit"
+          size="sm"
+          className="ml-auto gap-1.5"
+          disabled={props.isLoading || !props.input.trim()}
+        >
+          Send Message
+          <CornerDownLeft className="size-3.5" />
+        </Button>
       </div>
     </form>
   );
