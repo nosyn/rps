@@ -1,17 +1,17 @@
 name: dev-rps
 
 services:
-  # postgresql:
-  #   container_name: rps-database
-  #   image: 'bitnami/postgresql:16.3.0'
-  #   ports:
-  #     - 5432:5432
-  #   volumes:
-  #     - ./volumes/postgresql-persistence:/bitnami/postgresql
-  #   environment:
-  #     - POSTGRESQL_DATABASE=rps-db
-  #     - POSTGRESQL_USERNAME=db_user
-  #     - POSTGRESQL_PASSWORD=db_password
+  postgresql:
+    container_name: rps-database
+    image: 'bitnami/postgresql:16.3.0'
+    ports:
+      - 5432:5432
+    volumes:
+      - ./volumes/postgresql-persistence:/bitnami/postgresql
+    environment:
+      - POSTGRESQL_DATABASE=rps-db
+      - POSTGRESQL_USERNAME=db_user
+      - POSTGRESQL_PASSWORD=db_password
 
   # backend:
   #   container_name: rps-backend
