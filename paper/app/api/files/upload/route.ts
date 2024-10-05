@@ -3,6 +3,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import path from 'path';
 import { db } from '@/lib/drizzle';
 import { referenceSourceTable } from '@/lib/drizzle/schema';
+import { uploadDocument } from '@/lib/llamaindex/documents/upload';
+import { getDataSource } from '@/lib/engine';
 
 export const runtime = 'nodejs';
 
@@ -49,7 +51,12 @@ export async function POST(request: NextRequest) {
       name: filename,
     });
 
-    return NextResponse.json({ filename, params });
+    const index = await getDataSource(params);
+    if (!index) {
+      throw new Error(`StorageContext is empty - call 'npm run generate' to generate the storage first`);
+    }
+
+    return NextResponse.json(await uploadDocument(index, filename, buffer, type));
   } catch (error) {
     console.error('[Upload API]', error);
     return NextResponse.json({ error: (error as Error).message }, { status: 500 });
