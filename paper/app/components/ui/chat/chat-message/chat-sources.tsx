@@ -1,7 +1,7 @@
+import { Button } from "@/components/ui/button";
 import { Check, Copy, FileText } from "lucide-react";
 import Image from "next/image";
 import { useMemo } from "react";
-import { Button } from "../../button";
 import { FileIcon } from "../../document-preview";
 import {
   HoverCard,

@@ -1,12 +1,19 @@
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { JSONValue } from "ai";
-import { Button } from "../button";
+import { CornerDownLeft, Mic } from "lucide-react";
 import { DocumentPreview } from "../document-preview";
-import FileUploader from "../file-uploader";
-import { Input } from "../input";
 import UploadImagePreview from "../upload-image-preview";
 import { ChatHandler } from "./chat.interface";
 import { useFile } from "./hooks/use-file";
-import { LlamaCloudSelector } from "./widgets/LlamaCloudSelector";
+
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import FileUploader from "../file-uploader";
 
 const ALLOWED_EXTENSIONS = ["png", "jpg", "jpeg", "csv", "pdf", "txt", "docx"];
 
@@ -79,8 +86,12 @@ export default function ChatInput(
   return (
     <form
       onSubmit={onSubmit}
-      className="rounded-xl bg-white p-4 shadow-xl space-y-4 shrink-0"
+      className="relative overflow-hidden rounded-lg border bg-background focus-within:ring-1 focus-within:ring-ring"
     >
+      <Label htmlFor="message" className="sr-only">
+        Message
+      </Label>
+
       {imageUrl && (
         <UploadImagePreview url={imageUrl} onRemove={() => setImageUrl(null)} />
       )}
@@ -95,29 +106,45 @@ export default function ChatInput(
           ))}
         </div>
       )}
-      <div className="flex w-full items-start justify-between gap-4 ">
-        <Input
-          autoFocus
-          name="message"
-          placeholder="Type a message"
-          className="flex-1"
-          value={props.input}
-          onChange={props.handleInputChange}
-        />
-        <FileUploader
-          onFileUpload={handleUploadFile}
-          onFileError={props.onFileError}
-          config={{
-            allowedExtensions: ALLOWED_EXTENSIONS,
-            disabled: props.isLoading,
-          }}
-        />
-        {process.env.NEXT_PUBLIC_USE_LLAMACLOUD === "true" &&
-          props.setRequestData && (
-            <LlamaCloudSelector setRequestData={props.setRequestData} />
-          )}
-        <Button type="submit" disabled={props.isLoading || !props.input.trim()}>
-          Send message
+      <Input
+        autoFocus
+        name="message"
+        placeholder="Type a message"
+        className="min-h-12 resize-none border-0 p-3 shadow-none focus-visible:ring-0"
+        value={props.input}
+        onChange={props.handleInputChange}
+      />
+      <div className="flex items-center p-3 pt-0">
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <FileUploader
+              onFileUpload={handleUploadFile}
+              onFileError={props.onFileError}
+              config={{
+                allowedExtensions: ALLOWED_EXTENSIONS,
+                disabled: props.isLoading,
+              }}
+            />
+          </TooltipTrigger>
+          <TooltipContent side="top">Attach File</TooltipContent>
+        </Tooltip>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button variant="ghost" size="icon">
+              <Mic className="size-4" />
+              <span className="sr-only">Use Microphone</span>
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent side="top">Use Microphone</TooltipContent>
+        </Tooltip>
+        <Button
+          type="submit"
+          size="sm"
+          className="ml-auto gap-1.5"
+          disabled={props.isLoading || !props.input.trim()}
+        >
+          Send Message
+          <CornerDownLeft className="size-3.5" />
         </Button>
       </div>
     </form>

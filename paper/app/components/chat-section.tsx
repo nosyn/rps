@@ -1,5 +1,6 @@
 "use client";
 
+import { Badge } from "@/components/ui/badge";
 import { useChat } from "ai/react";
 import { useState } from "react";
 import { ChatInput, ChatMessages } from "./ui/chat";
@@ -33,7 +34,10 @@ export default function ChatSection() {
   });
 
   return (
-    <div className="space-y-4 w-full h-full flex flex-col">
+    <div className="relative flex h-full min-h-[50vh] flex-col rounded-xl bg-muted/50 p-4 lg:col-span-2">
+      <Badge variant="outline" className="absolute right-3 top-3">
+        Output
+      </Badge>
       <ChatMessages
         messages={messages}
         isLoading={isLoading}
@@ -41,6 +45,7 @@ export default function ChatSection() {
         stop={stop}
         append={append}
       />
+
       <ChatInput
         input={input}
         handleSubmit={handleSubmit}

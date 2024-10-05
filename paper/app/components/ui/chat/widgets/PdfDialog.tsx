@@ -1,5 +1,5 @@
+import { Button } from "@/components/ui/button";
 import dynamic from "next/dynamic";
-import { Button } from "../../button";
 import {
   Drawer,
   DrawerClose,

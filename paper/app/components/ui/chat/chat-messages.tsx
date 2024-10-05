@@ -1,7 +1,7 @@
 import { Loader2 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
-import { Button } from "../button";
+import { Button } from "@/components/ui/button";
 import ChatActions from "./chat-actions";
 import ChatMessage from "./chat-message";
 import { ChatHandler } from "./chat.interface";
@@ -57,7 +57,7 @@ export default function ChatMessages(
 
   return (
     <div
-      className="flex-1 w-full rounded-xl bg-white p-4 shadow-xl relative overflow-y-auto"
+      className="flex-1 w-full rounded-xl  relative overflow-y-auto"
       ref={scrollableChatContainerRef}
     >
       <div className="flex flex-col gap-5 divide-y">
