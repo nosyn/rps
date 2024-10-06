@@ -1,0 +1,20 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1728188328061,
+      "tag": "0000_create-reference-resource-table",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1728199057427,
+      "tag": "0001_youthful_stryfe",
+      "breakpoints": true
+    }
+  ]
+}
