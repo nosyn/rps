@@ -18,8 +18,12 @@ export const referenceSource = pgTable('reference_source', {
   status: referenceSourceStatus('status')
     .notNull()
     .$default(() => 'uploaded'),
-  createdAt: timestamp('created_at').defaultNow().notNull(),
-  updatedAt: timestamp('updated_at').defaultNow().notNull(),
+  createdAt: timestamp('created_at', { mode: 'date', precision: 3 })
+    .defaultNow()
+    .notNull(),
+  updatedAt: timestamp('updated_at', { mode: 'date', precision: 3 }).$onUpdate(
+    () => new Date(),
+  ),
 });
 
 export const insertReferenceSourceSchema = createInsertSchema(referenceSource);
